@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:climaa/services/weather.dart';
+import 'package:climaa/features/weather.dart';
 import 'location_screen.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
@@ -19,11 +19,15 @@ class _LoadingScreenState extends State<LoadingScreen> {
     WeatherModel weatherModel = WeatherModel();
     var weatherData = await weatherModel.getWeatherByCoordinates();
 
-
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      Navigator.push(context, MaterialPageRoute(builder: (context) {
-        return LocationScreen(locationWeather: weatherData);
-      }));
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) {
+            return LocationScreen(locationWeather: weatherData);
+          },
+        ),
+      );
     });
   }
 
@@ -31,10 +35,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: SpinKitDoubleBounce(
-          color: Colors.white,
-          size: 100.0,
-        ),
+        child: SpinKitDoubleBounce(color: Colors.white, size: 100.0),
       ),
     );
   }

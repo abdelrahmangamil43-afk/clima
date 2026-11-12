@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:climaa/services/location.dart';
-import 'package:climaa/services/networking.dart';
-const apikey='d69b8eed9eba72f23c22fcf8316c5c5b';
+import 'package:climaa/features/location.dart';
+import 'package:climaa/features/networking.dart';
 
+const apikey = 'd69b8eed9eba72f23c22fcf8316c5c5b';
 
 class WeatherModel {
-  Future<dynamic>  getCityWeather(String cityName) async{
-    NetworkHelper networkHelper=NetworkHelper('https://api.openweathermap.org/data/2.5/weather?q=$cityName&appid=$apikey&units=metric');
-    var weatherData=await networkHelper.getData();
+  Future<dynamic> getCityWeather(String cityName) async {
+    NetworkHelper networkHelper = NetworkHelper(
+      'https://api.openweathermap.org/data/2.5/weather?q=$cityName&appid=$apikey&units=metric',
+    );
+    var weatherData = await networkHelper.getData();
     return weatherData;
-
   }
 
   Future<dynamic> getWeatherByCoordinates() async {
@@ -17,18 +18,20 @@ class WeatherModel {
       print("location");
       Location location = Location();
       print("getcurrentlocation");
-      bool getCurrentLocationStatus=await location.getCurrentLocation();
+      bool getCurrentLocationStatus = await location.getCurrentLocation();
       if (getCurrentLocationStatus) {
         print("NetworkHelperStarts");
-        NetworkHelper networkHelper = NetworkHelper('https://api.openweathermap.org/data/2.5/weather?lat=${location.latitude}&lon=${location.longitude}&appid=$apikey&units=metric');
+        NetworkHelper networkHelper = NetworkHelper(
+          'https://api.openweathermap.org/data/2.5/weather?lat=${location.latitude}&lon=${location.longitude}&appid=$apikey&units=metric',
+        );
         var weatherData = await networkHelper.getData();
         return weatherData;
       }
-    }
-    catch(e){
+    } catch (e) {
       print("getlocation $e");
     }
   }
+
   String getWeatherIcon(int condition) {
     if (condition < 300) {
       return '🌩';

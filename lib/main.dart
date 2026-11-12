@@ -1,4 +1,4 @@
-import 'package:climaa/screens/loading_screen.dart';
+import 'package:climaa/core/loading_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:climaa/constants.dart';
 

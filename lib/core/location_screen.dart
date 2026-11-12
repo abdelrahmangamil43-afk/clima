@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:climaa/constants.dart';
-import 'package:climaa/services/weather.dart';
+import 'package:climaa/features/weather.dart';
 import 'city_screen.dart';
 
 class LocationScreen extends StatefulWidget {
@@ -75,15 +75,10 @@ class _LocationScreenState extends State<LocationScreen> {
                 children: [
                   IconButton(
                     onPressed: () async {
-                      var weatherData =
-                      await weather.getWeatherByCoordinates();
+                      var weatherData = await weather.getWeatherByCoordinates();
                       updateUI(weatherData);
                     },
-                    icon: Icon(
-                      Icons.near_me,
-                      size: 50.0,
-                      color: Colors.white,
-                    ),
+                    icon: Icon(Icons.near_me, size: 50.0, color: Colors.white),
                   ),
                   IconButton(
                     onPressed: () async {
@@ -97,8 +92,9 @@ class _LocationScreenState extends State<LocationScreen> {
                       );
 
                       if (typedName != null) {
-                        var weatherData =
-                        await weather.getCityWeather(typedName);
+                        var weatherData = await weather.getCityWeather(
+                          typedName,
+                        );
                         updateUI(weatherData);
                       }
                     },
@@ -117,14 +113,8 @@ class _LocationScreenState extends State<LocationScreen> {
                   children: [
                     Row(
                       children: [
-                        Text(
-                          '$temperature°',
-                          style: kTempTextStyle,
-                        ),
-                        Text(
-                          weatherIcon ?? '',
-                          style: kConditionTextStyle,
-                        ),
+                        Text('$temperature°', style: kTempTextStyle),
+                        Text(weatherIcon ?? '', style: kConditionTextStyle),
                       ],
                     ),
 
